@@ -1,0 +1,83 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>TEST</title>
+	<link rel="stylesheet" type="text/css" href="jquery-easyui-1.5.5.2/themes/default/easyui.css">
+	<script type="text/javascript" src="jquery/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="jquery-easyui-1.5.5.2/jquery.easyui.min.js"></script>
+</head>
+<body>
+<div>
+	<a>七大洲：</a><input id="test" />
+</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+
+	    //使用 'setValue' 设置默认显示
+        var data = [
+            {'text' : '未选择', 'value' : ''},
+            {'text' : '亚洲', 'value' : '1'},
+            {'text' : '欧洲', 'value' : '2'},
+            {'text' : '非洲', 'value' : '3'},
+            {'text' : '北美洲', 'value' : '4'},
+            {'text' : '南美洲', 'value' : '5'},
+            {'text' : '大洋洲', 'value' : '6'},
+            {'text' : '南极洲', 'value' : '7'}
+        ];
+
+        $('#test').combobox({
+            textField : 'text',
+            valueField : 'value',
+            panelHeight : 'auto',
+            data : data,
+			onLoadSuccess : function(){
+                $('#test').combobox('setValue','5');
+			}
+        })
+
+
+/*
+	    //使用 selected:true 设置默认显示
+	    var data = [
+			{'text' : '未选择', 'value' : ''},
+            {'text' : '亚洲', 'value' : '1'},
+            {'text' : '欧洲', 'value' : '2'},
+            {'text' : '非洲', 'value' : '3'},
+            {'text' : '北美洲', 'value' : '4','selected':true},
+            {'text' : '南美洲', 'value' : '5'},
+            {'text' : '大洋洲', 'value' : '6'},
+            {'text' : '南极洲', 'value' : '7'}
+		];
+
+	    $('#test').combobox({
+			textField : 'text',
+			valueField : 'value',
+			panelHeight : 'auto',
+			data : data,
+		})
+*/
+/*
+		//将 valueField 设置为空，适合作提示用
+        var data = [
+            {'text' : '未选择', 'value' : ''},
+            {'text' : '亚洲', 'value' : '1'},
+            {'text' : '欧洲', 'value' : '2'},
+            {'text' : '非洲', 'value' : '3'},
+            {'text' : '北美洲', 'value' : '4'},
+            {'text' : '南美洲', 'value' : '5'},
+            {'text' : '大洋洲', 'value' : '6'},
+            {'text' : '南极洲', 'value' : '7'}
+        ];
+
+        $('#test').combobox({
+            textField : 'text',
+            valueField : 'value',
+            panelHeight : 'auto',
+            data : data
+        })
+*/
+
+	})
+</script>
