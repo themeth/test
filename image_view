@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片上传服务器前预览</title>
+    <script type="text/javascript" src="jquery/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div>
+    <div>
+        <form>
+            <input id="image" type="file" >
+        </form>
+    </div>
+    <br>
+    <div>
+        <a id="view" type="button" target="_blank"><img id="image2" src="" width="400px"/></a>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(function(){
+        //打开页面时，图片位置会出现小方框，影响体验，故隐藏。待有图片时显示。
+        $('#image2').hide();
+
+        $('#image').change(function(){
+            var file = $('#image')[0].files;
+            console.log(file);
+            var url = window.URL.createObjectURL(file[0]);
+            $('#view').attr('href',url);
+            $('#image2').attr('src',url);
+            $('#image2').show();
+        })
+    })
+</script>
