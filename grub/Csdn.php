@@ -18,15 +18,12 @@ class Csdn {
             $article_result = Grub::get_html($v,$options);
             preg_match('/class=\"title-article\">(.*?)<.*?<article>(.*?<\/div>)\s*<div\s+class=\"hide-article-box/is',$article_result,$matches2);
             $data[$k]['title'] = $matches2[1];
-            $data[$k]['article'] = $matches2[2];
-
+            $data[$k]['content'] = $matches2[2];
         }
         return $data;
     }
-
 }
-//die('test');
 $csdn = new Csdn();
 $data = $csdn->main();
-//print_r($data);
-DB::insert('article',$data);
+$db = new Db();
+$db->insert('article',$data);
