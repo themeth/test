@@ -1,42 +1,37 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: viruser
- * Date: 2018/6/21
- * Time: 17:26
- */
 
+date_default_timezone_set('Asia/Shanghai');
 class Db {
     public $db;
-
     public function __construct() {
         $dsn = "mysql:host=127.0.0.1;dbname=test";
         $this->db = new PDO($dsn, 'root','root');
     }
-
-    public static function insert($table,$data){
-
-//        print_r($data);exit;
+    public function insert($table,$data){
         foreach($data as $k=>$v){
             $field ='';
             $value ='';
             foreach($v as $k1=>$v1){
                 if( empty($field) ){
                     $field .= $k1;
-                    $value .= "'".$v1."'";
+                    $value .= "'".addslashes($v1)."'";
                 }else{
                     $field .= ','.$k1;
-                    $value .= ",'".$v1."'";
+                    $value .= ",'".addslashes($v1)."'";
                 }
             }
-            $time = date('Y-m-d H:i:s');
-            $sql[] = "insert into $table ($field".",create_time,update_time".") values($value".",'$time','$time'".")";
-
+            $sqls[] = "insert into $table ($field) values($value)";
         }
-        /*$field .= ",create_time,update_time";
-        $time = date('Y-m-d H:i:s');
-        $value .= ",'$time','$time'";
-        $sql = "insert into $table ($field) values($value)";*/
-        print_r($sql);
+        foreach($sqls as $sql){
+            $result = $this->db->exec($sql);
+            $error = $this->db->errorInfo();
+            if( empty($error[1]) ){
+                echo '入库成功<br>';
+            }else{
+                echo $error[2].'<br>'.$sql.'<br>';
+            }
+        }
+
     }
 }
+
